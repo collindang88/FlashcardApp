@@ -6,7 +6,6 @@
 This app shows a question and allows users to click on each answer. It also has buttons to reset the question and show/hide the answers.
 
 ### App Walk-though
-`TODO://` Add the URL to your animated app walk-though `gif` in the image tag below. Make sure the gif actually renders and animates when viewing this README. (☝️ Remove this paragraph after after adding gif)
 
 <img src="https://github.com/collindang88/FlashcardApp/blob/main/flashcard_app_lab1.gif" width=200><br>
 
