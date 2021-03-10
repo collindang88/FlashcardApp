@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCardActivity">
+
+
+    <ImageView
+        android:id="@+id/cancelButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/cancelicon" />
+
+    <ImageView
+        android:id="@+id/saveButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/saveicon" />
+
+    <EditText
+        android:id="@+id/questionField"
+        android:hint="Enter question here"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="20dp" />
+    <EditText
+        android:id="@+id/answerField"
+        android:hint="Enter answer here"
+        android:inputType="textMultiLine"
+        android:layout_below="@id/questionField"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="20dp" />
+
+</RelativeLayout>
