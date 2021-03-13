@@ -28,6 +28,7 @@
         android:visibility="invisible" />
     -->
 
+    <!--
     <TextView
         android:id="@+id/answer1"
         android:layout_width="match_parent"
@@ -87,6 +88,7 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Reset" />
+        !-->
 
     <ImageView
         android:id="@+id/addCardButton"
@@ -97,5 +99,14 @@
         android:layout_marginBottom="10dp"
         android:layout_marginRight="10dp"
         android:src="@drawable/addicon" />
+    <ImageView
+        android:id="@+id/nextCardButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/flashcard_question"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/nexticon" />
 
 </RelativeLayout>
