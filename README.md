@@ -7,7 +7,7 @@ This appp allows users to create their own flashcards. Old flashcards are saved 
 
 ### App Walk-though
 
-<img src="YOUR_GIF_URL_HERE" width=200><br>
+<img src="https://github.com/collindang88/FlashcardApp/blob/main/flashcard_app_lab3.gif" width=400><br>
 
 ## Required
 - [x] User can create a card and still see their created card when the app is relaunched.
