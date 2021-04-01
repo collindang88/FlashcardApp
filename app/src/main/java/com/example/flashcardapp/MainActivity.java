@@ -2,11 +2,17 @@ package com.example.flashcardapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -24,10 +30,15 @@ public class MainActivity extends AppCompatActivity {
     FlashcardDatabase flashcardDatabase;
     List<Flashcard> allFlashcards;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RelativeLayout relativeLayout = findViewById(R.id.relativeLayout);
+        relativeLayout.setBackgroundColor(getResources().getColor(R.color.beige));
 
         TextView flashcard = findViewById(R.id.flashcard_question);
         /*
@@ -116,11 +127,28 @@ public class MainActivity extends AppCompatActivity {
                 // findViewById(R.id.flashcard_answer).setVisibility(View.VISIBLE);
                 // findViewById(R.id.flashcard_question).setVisibility(View.INVISIBLE);
                 if (!flipped[0]) {
+
+                    int cx = flashcard.getWidth() / 2;
+                    int cy = flashcard.getHeight() / 2;
+                    float finalRadius = (float) Math.hypot(cx, cy);
+                    Animator anim = ViewAnimationUtils.createCircularReveal(flashcard, cx, cy, 0f, finalRadius);
+
                     flashcard.setText(questionAnswer[1]);
                     flipped[0] = true;
+
+                    anim.setDuration(750);
+                    anim.start();
                 } else {
+                    int cx = flashcard.getWidth() / 2;
+                    int cy = flashcard.getHeight() / 2;
+                    float finalRadius = (float) Math.hypot(cx, cy);
+                    Animator anim = ViewAnimationUtils.createCircularReveal(flashcard, cx, cy, 0f, finalRadius);
+
                     flashcard.setText(questionAnswer[0]);
                     flipped[0] = false;
+
+                    anim.setDuration(750);
+                    anim.start();
                 }
             }
         });
@@ -130,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
                 MainActivity.this.startActivityForResult(intent, 100);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
 
             }
         });
@@ -137,6 +166,31 @@ public class MainActivity extends AppCompatActivity {
         nextCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                final Animation leftOutAnim = AnimationUtils.loadAnimation(v.getContext(), R.anim.left_out);
+                final Animation rightInAnim = AnimationUtils.loadAnimation(v.getContext(), R.anim.right_in);
+
+                leftOutAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        flashcard.setText(questionAnswer[0]);
+                        flashcard.startAnimation(rightInAnim);
+                        flipped[0] = false;
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+
+
                 if (currentCardDisplayedIndex == -1) {
                     return;
                 }
@@ -149,14 +203,17 @@ public class MainActivity extends AppCompatActivity {
                     currentCardDisplayedIndex = 0;
                     questionAnswer[0] = allFlashcards.get(0).getQuestion();
                     questionAnswer[1] = allFlashcards.get(0).getAnswer();
-                    flashcard.setText(questionAnswer[0]);
-                    flipped[0] = false;
+                    flashcard.startAnimation(leftOutAnim);
+
                 } else {
                     questionAnswer[0] = allFlashcards.get(currentCardDisplayedIndex).getQuestion();
                     questionAnswer[1] = allFlashcards.get(currentCardDisplayedIndex).getAnswer();
-                    flashcard.setText(questionAnswer[0]);
-                    flipped[0] = false;
+                    flashcard.startAnimation(leftOutAnim);
                 }
+
+
+
+
 
 
             }
